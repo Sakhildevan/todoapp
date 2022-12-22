@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:todoapp/api/firebase_api.dart';
 import 'package:todoapp/main.dart';
+import 'package:todoapp/model/todo.dart';
+import 'package:todoapp/provider/todos.dart';
 import 'package:todoapp/widget/add_todo_dialogue.dart';
 import 'package:flutter/src/material/dialog.dart';
 import 'package:todoapp/widget/completed_listwidget.dart';
 import 'package:todoapp/widget/todo_list_widget.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -39,7 +43,16 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.done, size: 28), label: 'Completed')
         ],
       ),
-      body: tabs[selectedIndex],
+      body: StreamBuilder<List<Todo>>(
+        stream: FirebaseApi.readTodos(),
+        builder: (context, snapshot) {
+          final todos = snapshot.data;
+          print('Todos: $todos');
+          final provider = Provider.of<TodosProvider>(context);
+          provider.setTodos(todos!);
+          return tabs[selectedIndex];
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
