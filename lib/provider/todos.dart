@@ -9,17 +9,17 @@ class TodosProvider extends ChangeNotifier {
   List<Todo> get todoCompleted =>
       _todos.where((todo) => todo.isDone == true).toList();
 
-  // void setTodos(List<Todo> todos) =>
-  //     WidgetsBinding.instance.addPostFrameCallback((_) {
-  //       _todos = todos;
+  void setTodos(List<Todo> todos) =>
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _todos = todos;
 
-  //       notifyListeners();
-  //     });
-  void setTodos(List<Todo> todos) {
-    print('Setting todos: $todos');
-    _todos = todos;
-    notifyListeners();
-  }
+        notifyListeners();
+      });
+  // void setTodos(List<Todo> todos) {
+  //   print('Setting todos: $todos');
+  //   _todos = todos;
+  //   notifyListeners();
+  // }
 
   void addTodo(Todo todo) => FirebaseApi.createTodo(todo);
 

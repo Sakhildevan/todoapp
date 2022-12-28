@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
           final todos = snapshot.data;
           print('Todos: $todos');
           final provider = Provider.of<TodosProvider>(context);
-          provider.setTodos(todos!);
+          provider.setTodos;
           return tabs[selectedIndex];
         },
       ),

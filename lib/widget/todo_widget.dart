@@ -8,7 +8,7 @@ import 'package:todoapp/utils.dart';
 
 class TodoWidget extends StatelessWidget {
   final Todo todo;
-  const TodoWidget({
+  TodoWidget({
     required this.todo,
     Key? key,
   }) : super(key: key);
